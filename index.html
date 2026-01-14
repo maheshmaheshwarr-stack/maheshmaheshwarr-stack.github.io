@@ -324,6 +324,112 @@
       font-size: 8rem;
     }
 
+    /* Skills Grid */
+    .skills-section {
+      margin-top: 48px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    .skills-section h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .skill-badge {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 12px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .skill-badge:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+    }
+
+    .skill-icon {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .skill-name {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* Current Focus & Personal */
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .info-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.2s;
+    }
+
+    .info-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
+    }
+
+    .info-card h4 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-card p {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .info-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .info-card li {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      padding: 8px 0;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .info-card li:before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
     /* Contact Section */
     .contact-grid {
       display: grid;
@@ -502,6 +608,15 @@
       .testimonials-grid {
         grid-template-columns: 1fr;
       }
+
+      .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 12px;
+      }
+
+      .info-cards {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -630,6 +745,106 @@
         </div>
         <div class="about-image">
           👨‍💻
+        </div>
+      </div>
+
+      <!-- Skills & Expertise -->
+      <div class="skills-section">
+        <h3>Skills & Expertise</h3>
+        <div class="skills-grid">
+          <div class="skill-badge">
+            <div class="skill-icon">💼</div>
+            <div class="skill-name">PeopleSoft FSCM</div>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon">💰</div>
+            <div class="skill-name">Financials</div>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon">📊</div>
+            <div class="skill-name">Supply Chain</div>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon">🔧</div>
+            <div class="skill-name">PeopleTools</div>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon">🗄️</div>
+            <div class="skill-name">SQL</div>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon">🔗</div>
+            <div class="skill-name">Integration</div>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon">🚀</div>
+            <div class="skill-name">Implementation</div>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon">⬆️</div>
+            <div class="skill-name">Upgrades</div>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon">🛠️</div>
+            <div class="skill-name">Support</div>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon">🤝</div>
+            <div class="skill-name">Client Relations</div>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon">🧩</div>
+            <div class="skill-name">Problem Solving</div>
+          </div>
+          <div class="skill-badge">
+            <div class="skill-icon">🤖</div>
+            <div class="skill-name">AI Exploration</div>
+          </div>
+        </div>
+
+        <!-- Current Focus & Personal Touch -->
+        <div class="info-cards">
+          <div class="info-card">
+            <h4>🎯 Current Focus</h4>
+            <p>
+              I'm currently exploring the intersection of AI and information curation, 
+              building tools that help people cut through the noise.
+            </p>
+            <ul>
+              <li>Developing AI-powered news aggregation platforms</li>
+              <li>Exploring machine learning for content filtering</li>
+              <li>Building user-centric information tools</li>
+              <li>Continuous learning in AI/ML technologies</li>
+            </ul>
+          </div>
+
+          <div class="info-card">
+            <h4>💡 What Drives Me</h4>
+            <p>
+              I believe technology should empower people, not overwhelm them. 
+              My passion lies in creating solutions that are both powerful and accessible.
+            </p>
+            <ul>
+              <li>Solving complex technical challenges</li>
+              <li>Mentoring and knowledge sharing</li>
+              <li>Building tools that make a difference</li>
+              <li>Staying curious and learning continuously</li>
+            </ul>
+          </div>
+
+          <div class="info-card">
+            <h4>🌟 Beyond Work</h4>
+            <p>
+              When I'm not working with enterprise systems or building AI tools, 
+              I enjoy exploring new technologies and staying connected with the tech community.
+            </p>
+            <ul>
+              <li>Reading about emerging technologies</li>
+              <li>Experimenting with new tools and frameworks</li>
+              <li>Contributing to open discussions on tech trends</li>
+              <li>Balancing innovation with practical solutions</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

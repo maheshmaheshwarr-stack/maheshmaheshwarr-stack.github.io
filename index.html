@@ -664,6 +664,7 @@
       <a href="#" class="logo">Mahesh Ramanathan</a>
       <ul class="nav-links">
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#erp-ai-demo">AI Demo</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#hobbies">Hobbies</a></li>
         <li><a href="#now">Now</a></li>
@@ -1044,6 +1045,402 @@
       </div>
     </div>
   </section>
+
+  <!-- ERP AI Demo Section -->
+  <section id="erp-ai-demo" style="background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%); padding: 80px 0;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Live Demo</span>
+        <h2>ERP Modernization with Agentic AI</h2>
+        <p>See how AI can transform PeopleSoft into an intelligent, autonomous system</p>
+      </div>
+
+      <div style="max-width: 1000px; margin: 0 auto;">
+        
+        <!-- Demo Interface -->
+        <div style="
+          background: white;
+          border: 2px solid var(--border);
+          border-radius: 16px;
+          overflow: hidden;
+          box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        ">
+          <!-- Demo Header -->
+          <div style="
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          ">
+            <div>
+              <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 4px;">AI-Enhanced PeopleSoft Assistant</h3>
+              <p style="font-size: 0.875rem; opacity: 0.9; margin: 0;">Natural language queries → Autonomous execution</p>
+            </div>
+            <div style="
+              background: rgba(255,255,255,0.2);
+              padding: 6px 12px;
+              border-radius: 6px;
+              font-size: 0.75rem;
+              font-weight: 600;
+            ">LIVE DEMO</div>
+          </div>
+
+          <!-- Demo Content -->
+          <div style="padding: 32px;">
+            
+            <!-- Quick Actions -->
+            <div style="margin-bottom: 24px;">
+              <p style="font-size: 0.875rem; font-weight: 600; color: var(--text); margin-bottom: 12px;">Try these queries:</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                <button onclick="runERPDemo('pending-pos')" style="
+                  padding: 8px 16px;
+                  background: #f1f5f9;
+                  border: 2px solid #e2e8f0;
+                  border-radius: 8px;
+                  font-size: 0.875rem;
+                  cursor: pointer;
+                  color: var(--text);
+                  font-weight: 500;
+                  transition: all 0.2s;
+                " onmouseover="this.style.borderColor='var(--primary)'; this.style.background='#dbeafe'" onmouseout="this.style.borderColor='#e2e8f0'; this.style.background='#f1f5f9'">
+                  Show pending POs
+                </button>
+                <button onclick="runERPDemo('vendor-analysis')" style="
+                  padding: 8px 16px;
+                  background: #f1f5f9;
+                  border: 2px solid #e2e8f0;
+                  border-radius: 8px;
+                  font-size: 0.875rem;
+                  cursor: pointer;
+                  color: var(--text);
+                  font-weight: 500;
+                  transition: all 0.2s;
+                " onmouseover="this.style.borderColor='var(--primary)'; this.style.background='#dbeafe'" onmouseout="this.style.borderColor='#e2e8f0'; this.style.background='#f1f5f9'">
+                  Analyze vendor performance
+                </button>
+                <button onclick="runERPDemo('budget-forecast')" style="
+                  padding: 8px 16px;
+                  background: #f1f5f9;
+                  border: 2px solid #e2e8f0;
+                  border-radius: 8px;
+                  font-size: 0.875rem;
+                  cursor: pointer;
+                  color: var(--text);
+                  font-weight: 500;
+                  transition: all 0.2s;
+                " onmouseover="this.style.borderColor='var(--primary)'; this.style.background='#dbeafe'" onmouseout="this.style.borderColor='#e2e8f0'; this.style.background='#f1f5f9'">
+                  Forecast budget variance
+                </button>
+              </div>
+            </div>
+
+            <!-- Demo Output -->
+            <div id="erp-demo-output" style="
+              min-height: 300px;
+              background: #f8fafc;
+              border: 2px solid #e2e8f0;
+              border-radius: 12px;
+              padding: 24px;
+            ">
+              <div style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
+                <div style="font-size: 3rem; margin-bottom: 16px;">🤖</div>
+                <p style="font-size: 1rem; margin-bottom: 8px; font-weight: 600;">Click a query above to see AI in action</p>
+                <p style="font-size: 0.875rem;">Watch how Agentic AI autonomously processes PeopleSoft data</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Benefits Grid -->
+        <div style="
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+          gap: 24px;
+          margin-top: 48px;
+        ">
+          <div style="
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+          ">
+            <div style="font-size: 2.5rem; margin-bottom: 12px;">⚡</div>
+            <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--text);">95% Faster</h4>
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin: 0;">Queries that took hours now complete in seconds</p>
+          </div>
+
+          <div style="
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+          ">
+            <div style="font-size: 2.5rem; margin-bottom: 12px;">🎯</div>
+            <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--text);">Zero Errors</h4>
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin: 0;">AI eliminates manual data entry mistakes</p>
+          </div>
+
+          <div style="
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+          ">
+            <div style="font-size: 2.5rem; margin-bottom: 12px;">🔄</div>
+            <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--text);">24/7 Autonomous</h4>
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin: 0;">AI agents work around the clock</p>
+          </div>
+
+          <div style="
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+          ">
+            <div style="font-size: 2.5rem; margin-bottom: 12px;">💰</div>
+            <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--text);">$150K+ Savings</h4>
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin: 0;">Annual cost reduction per module</p>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div style="
+          text-align: center;
+          margin-top: 48px;
+          padding: 32px;
+          background: linear-gradient(135deg, #dbeafe, #eff6ff);
+          border-radius: 16px;
+          border: 2px solid var(--primary);
+        ">
+          <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 12px;">Ready to Modernize Your ERP?</h3>
+          <p style="font-size: 1rem; color: var(--text-muted); margin-bottom: 24px; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Let's discuss how Agentic AI can transform your PeopleSoft system into an intelligent, autonomous platform.
+          </p>
+          <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <a href="https://calendly.com/mahesh-maheshwarr" target="_blank" rel="noopener noreferrer" style="
+              padding: 12px 28px;
+              background: var(--primary);
+              color: white;
+              text-decoration: none;
+              border-radius: 8px;
+              font-weight: 600;
+              font-size: 0.9375rem;
+              display: inline-flex;
+              align-items: center;
+              gap: 8px;
+              box-shadow: 0 4px 6px -1px rgb(30 64 175 / 0.3);
+              transition: all 0.2s;
+            " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 15px -3px rgb(30 64 175 / 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px -1px rgb(30 64 175 / 0.3)'">
+              📅 Schedule Consultation
+            </a>
+            <a href="#contact" style="
+              padding: 12px 28px;
+              background: white;
+              color: var(--primary);
+              text-decoration: none;
+              border-radius: 8px;
+              font-weight: 600;
+              font-size: 0.9375rem;
+              border: 2px solid var(--primary);
+              display: inline-flex;
+              align-items: center;
+              gap: 8px;
+              transition: all 0.2s;
+            " onmouseover="this.style.background='var(--primary)'; this.style.color='white'" onmouseout="this.style.background='white'; this.style.color='var(--primary)'">
+              💬 Get in Touch
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // ERP AI Demo Logic
+    function runERPDemo(demoType) {
+      const output = document.getElementById('erp-demo-output');
+      
+      // Show loading
+      output.innerHTML = `
+        <div style="text-align: center; padding: 40px 20px;">
+          <div style="
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e2e8f0;
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+          "></div>
+          <p style="color: var(--text-muted); font-size: 0.875rem;">AI Agent processing your request...</p>
+        </div>
+      `;
+
+      // Add spin animation
+      if (!document.getElementById('spin-animation')) {
+        const style = document.createElement('style');
+        style.id = 'spin-animation';
+        style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+        document.head.appendChild(style);
+      }
+
+      // Simulate AI processing
+      setTimeout(() => {
+        let demoHTML = '';
+        
+        if (demoType === 'pending-pos') {
+          demoHTML = `
+            <div style="margin-bottom: 20px;">
+              <h4 style="font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                <span style="color: var(--primary);">✓</span> Query Processed
+              </h4>
+              <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 16px;">
+                AI Agent executed: <code style="background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 0.8125rem;">SELECT * FROM PO_HEADERS WHERE STATUS='PENDING' AND AMOUNT > 10000</code>
+              </p>
+            </div>
+
+            <div style="overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem;">
+                <thead>
+                  <tr style="background: var(--primary); color: white;">
+                    <th style="padding: 12px; text-align: left; font-weight: 600;">PO Number</th>
+                    <th style="padding: 12px; text-align: left; font-weight: 600;">Vendor</th>
+                    <th style="padding: 12px; text-align: right; font-weight: 600;">Amount</th>
+                    <th style="padding: 12px; text-align: left; font-weight: 600;">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 12px;">PO-2026-001</td>
+                    <td style="padding: 12px;">Tech Solutions Inc</td>
+                    <td style="padding: 12px; text-align: right;">$45,000</td>
+                    <td style="padding: 12px;"><span style="background: #fef3c7; color: #92400e; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">PENDING</span></td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 12px;">PO-2026-002</td>
+                    <td style="padding: 12px;">Office Supplies Co</td>
+                    <td style="padding: 12px; text-align: right;">$12,500</td>
+                    <td style="padding: 12px;"><span style="background: #fef3c7; color: #92400e; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">PENDING</span></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 12px;">PO-2026-003</td>
+                    <td style="padding: 12px;">Cloud Services Ltd</td>
+                    <td style="padding: 12px; text-align: right;">$28,750</td>
+                    <td style="padding: 12px;"><span style="background: #fef3c7; color: #92400e; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">PENDING</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div style="margin-top: 20px; padding: 16px; background: #dbeafe; border-left: 4px solid var(--primary); border-radius: 8px;">
+              <p style="font-size: 0.875rem; color: var(--text); margin-bottom: 8px; font-weight: 600;">
+                🤖 AI Recommendation:
+              </p>
+              <p style="font-size: 0.875rem; color: var(--text-muted); margin: 0;">
+                3 POs totaling $86,250 are pending approval for 5+ days. Would you like me to send reminder notifications to approvers?
+              </p>
+            </div>
+          `;
+        } else if (demoType === 'vendor-analysis') {
+          demoHTML = `
+            <div style="margin-bottom: 20px;">
+              <h4 style="font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                <span style="color: var(--primary);">✓</span> Analysis Complete
+              </h4>
+              <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 16px;">
+                AI Agent analyzed 12 months of vendor data across 150+ transactions
+              </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px;">
+              <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 16px;">
+                <div style="font-size: 0.75rem; color: #166534; font-weight: 600; margin-bottom: 4px;">TOP PERFORMER</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: #15803d; margin-bottom: 4px;">Tech Solutions</div>
+                <div style="font-size: 0.875rem; color: #166534;">98% on-time delivery</div>
+              </div>
+              <div style="background: #fef3c7; border: 1px solid #fde047; border-radius: 8px; padding: 16px;">
+                <div style="font-size: 0.75rem; color: #92400e; font-weight: 600; margin-bottom: 4px;">NEEDS ATTENTION</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: #b45309; margin-bottom: 4px;">Office Supplies</div>
+                <div style="font-size: 0.875rem; color: #92400e;">72% on-time delivery</div>
+              </div>
+              <div style="background: #dbeafe; border: 1px solid #93c5fd; border-radius: 8px; padding: 16px;">
+                <div style="font-size: 0.75rem; color: #1e40af; font-weight: 600; margin-bottom: 4px;">COST SAVINGS</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: #1e40af; margin-bottom: 4px;">$24,500</div>
+                <div style="font-size: 0.875rem; color: #1e40af;">Potential annual savings</div>
+              </div>
+            </div>
+
+            <div style="margin-top: 20px; padding: 16px; background: #dbeafe; border-left: 4px solid var(--primary); border-radius: 8px;">
+              <p style="font-size: 0.875rem; color: var(--text); margin-bottom: 8px; font-weight: 600;">
+                🤖 AI Insights:
+              </p>
+              <ul style="font-size: 0.875rem; color: var(--text-muted); margin: 0; padding-left: 20px;">
+                <li>Consider renegotiating contract with Office Supplies Co</li>
+                <li>Tech Solutions eligible for preferred vendor status</li>
+                <li>3 vendors have better pricing for similar items</li>
+              </ul>
+            </div>
+          `;
+        } else if (demoType === 'budget-forecast') {
+          demoHTML = `
+            <div style="margin-bottom: 20px;">
+              <h4 style="font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                <span style="color: var(--primary);">✓</span> Forecast Generated
+              </h4>
+              <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 16px;">
+                AI Agent analyzed historical spending patterns and predicted Q2 2026 budget variance
+              </p>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border-radius: 12px; padding: 24px; margin-bottom: 20px;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; text-align: center;">
+                <div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; margin-bottom: 8px;">BUDGET</div>
+                  <div style="font-size: 2rem; font-weight: 700; color: var(--text);">$500K</div>
+                </div>
+                <div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; margin-bottom: 8px;">FORECAST</div>
+                  <div style="font-size: 2rem; font-weight: 700; color: #dc2626;">$547K</div>
+                </div>
+                <div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; margin-bottom: 8px;">VARIANCE</div>
+                  <div style="font-size: 2rem; font-weight: 700; color: #dc2626;">+9.4%</div>
+                </div>
+                <div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; margin-bottom: 8px;">CONFIDENCE</div>
+                  <div style="font-size: 2rem; font-weight: 700; color: #16a34a;">87%</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: 20px; padding: 16px; background: #fee2e2; border-left: 4px solid #dc2626; border-radius: 8px;">
+              <p style="font-size: 0.875rem; color: var(--text); margin-bottom: 8px; font-weight: 600;">
+                ⚠️ AI Alert:
+              </p>
+              <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 12px;">
+                Budget overrun predicted. Key drivers:
+              </p>
+              <ul style="font-size: 0.875rem; color: var(--text-muted); margin: 0; padding-left: 20px;">
+                <li>IT infrastructure costs up 15% (cloud migration)</li>
+                <li>Contractor expenses exceeding plan by $32K</li>
+                <li>Recommended action: Review discretionary spending</li>
+              </ul>
+            </div>
+          `;
+        }
+
+        output.innerHTML = demoHTML;
+      }, 1500);
+    }
+  </script>
 
   <!-- About Section -->
   <section id="about" style="background: var(--bg-soft);">

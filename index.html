@@ -2580,5 +2580,375 @@
       }
     });
   </script>
+
+  <!-- Intelligent Assistant (Free, No API Required) -->
+  <div id="ai-assistant" style="
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+  ">
+    <!-- Chat Button -->
+    <button id="ai-chat-btn" onclick="toggleAIChat()" style="
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border: none;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(30, 64, 175, 0.4);
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+      💬
+    </button>
+
+    <!-- Chat Window -->
+    <div id="ai-chat-window" style="
+      display: none;
+      position: absolute;
+      bottom: 80px;
+      right: 0;
+      width: 380px;
+      max-height: 500px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      flex-direction: column;
+    ">
+      <!-- Header -->
+      <div style="
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        padding: 16px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      ">
+        <div>
+          <div style="font-weight: 700; font-size: 1rem;">Ask Me Anything</div>
+          <div style="font-size: 0.75rem; opacity: 0.9;">Intelligent Assistant</div>
+        </div>
+        <button onclick="toggleAIChat()" style="
+          background: rgba(255,255,255,0.2);
+          border: none;
+          color: white;
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          cursor: pointer;
+          font-size: 18px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        ">×</button>
+      </div>
+
+      <!-- Messages -->
+      <div id="ai-messages" style="
+        flex: 1;
+        overflow-y: auto;
+        padding: 20px;
+        max-height: 350px;
+        background: #f8fafc;
+      ">
+        <div class="ai-message" style="
+          background: white;
+          padding: 12px 16px;
+          border-radius: 12px;
+          margin-bottom: 12px;
+          border-left: 3px solid var(--primary);
+        ">
+          <div style="font-size: 0.875rem; color: var(--text);">
+            👋 Hi! I'm Mahesh's intelligent assistant. I can help you with:
+            <ul style="margin: 8px 0 0 0; padding-left: 20px; font-size: 0.8125rem;">
+              <li>PeopleSoft expertise & experience</li>
+              <li>Projects & testimonials</li>
+              <li>ERP modernization insights</li>
+              <li>Contact information</li>
+            </ul>
+            Try asking: "What's your PeopleSoft experience?" or "Tell me about your projects"
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div style="
+        padding: 12px 20px;
+        background: white;
+        border-top: 1px solid #e2e8f0;
+      ">
+        <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 8px; font-weight: 600;">Quick Questions:</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+          <button onclick="askQuestion('experience')" style="
+            padding: 6px 12px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            color: var(--text);
+          ">Experience</button>
+          <button onclick="askQuestion('projects')" style="
+            padding: 6px 12px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            color: var(--text);
+          ">Projects</button>
+          <button onclick="askQuestion('contact')" style="
+            padding: 6px 12px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            color: var(--text);
+          ">Contact</button>
+          <button onclick="askQuestion('ai')" style="
+            padding: 6px 12px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            color: var(--text);
+          ">AI Work</button>
+        </div>
+      </div>
+
+      <!-- Input -->
+      <div style="
+        padding: 16px 20px;
+        background: white;
+        border-top: 1px solid #e2e8f0;
+      ">
+        <div style="display: flex; gap: 8px;">
+          <input 
+            type="text" 
+            id="ai-input" 
+            placeholder="Ask me anything..."
+            onkeypress="if(event.key==='Enter') sendAIMessage()"
+            style="
+              flex: 1;
+              padding: 10px 14px;
+              border: 2px solid #e2e8f0;
+              border-radius: 8px;
+              font-size: 0.875rem;
+              outline: none;
+            "
+          >
+          <button onclick="sendAIMessage()" style="
+            padding: 10px 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+          ">→</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // AI Assistant Logic (Free, Rule-Based Intelligence)
+    function toggleAIChat() {
+      const chatWindow = document.getElementById('ai-chat-window');
+      if (chatWindow.style.display === 'none' || !chatWindow.style.display) {
+        chatWindow.style.display = 'flex';
+        document.getElementById('ai-input').focus();
+      } else {
+        chatWindow.style.display = 'none';
+      }
+    }
+
+    function askQuestion(topic) {
+      const questions = {
+        'experience': "What's your PeopleSoft experience?",
+        'projects': "Tell me about your projects",
+        'contact': "How can I contact you?",
+        'ai': "What AI work are you doing?"
+      };
+      document.getElementById('ai-input').value = questions[topic];
+      sendAIMessage();
+    }
+
+    function sendAIMessage() {
+      const input = document.getElementById('ai-input');
+      const message = input.value.trim();
+      if (!message) return;
+
+      // Add user message
+      addMessage(message, 'user');
+      input.value = '';
+
+      // Generate AI response
+      setTimeout(() => {
+        const response = generateResponse(message);
+        addMessage(response, 'ai');
+      }, 500);
+    }
+
+    function addMessage(text, type) {
+      const messagesDiv = document.getElementById('ai-messages');
+      const messageDiv = document.createElement('div');
+      
+      if (type === 'user') {
+        messageDiv.style.cssText = `
+          background: var(--primary);
+          color: white;
+          padding: 10px 14px;
+          border-radius: 12px;
+          margin-bottom: 12px;
+          margin-left: 40px;
+          font-size: 0.875rem;
+        `;
+      } else {
+        messageDiv.style.cssText = `
+          background: white;
+          padding: 12px 16px;
+          border-radius: 12px;
+          margin-bottom: 12px;
+          border-left: 3px solid var(--primary);
+          font-size: 0.875rem;
+          color: var(--text);
+          line-height: 1.6;
+        `;
+      }
+      
+      messageDiv.innerHTML = text;
+      messagesDiv.appendChild(messageDiv);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    function generateResponse(message) {
+      const msg = message.toLowerCase();
+      
+      // Knowledge base (your information)
+      const knowledge = {
+        experience: {
+          keywords: ['experience', 'years', 'background', 'expertise', 'work', 'career', 'peoplesoft', 'fscm', 'oracle', 'rimini'],
+          response: `<strong>20+ years of PeopleSoft FSCM expertise!</strong><br><br>
+            • Worked with Oracle, Wipro, and Rimini Street<br>
+            • Expert in PeopleSoft Financials and Supply Chain<br>
+            • Specialized in implementations, upgrades, and 24/7 support<br>
+            • Served 30+ global enterprises<br><br>
+            <a href="#about" onclick="toggleAIChat()" style="color: var(--primary); font-weight: 600;">View full background →</a>`
+        },
+        projects: {
+          keywords: ['project', 'built', 'building', 'work', 'portfolio', 'created'],
+          response: `<strong>Current Projects:</strong><br><br>
+            🎯 <strong>Mahesh +ve Pill</strong> - AI-curated news platform<br>
+            🤖 <strong>ERP Modernization Tools</strong> - AI-powered PeopleSoft automation<br>
+            🧪 <strong>AI Learning Lab</strong> - ML experiments and prototypes<br><br>
+            <a href="#projects" onclick="toggleAIChat()" style="color: var(--primary); font-weight: 600;">See all projects →</a>`
+        },
+        testimonials: {
+          keywords: ['testimonial', 'recommendation', 'review', 'feedback', 'people say', 'references'],
+          response: `<strong>Featured Testimonials:</strong><br><br>
+            ⭐ <strong>Jayaprakash (Rimini Street):</strong> "Rare depth of technical knowledge"<br>
+            ⭐ <strong>Alan Gould:</strong> "Excellent problem solver, consummate professional"<br>
+            ⭐ <strong>Phill Wall:</strong> "Incredibly reliable and dedicated"<br><br>
+            <a href="#testimonials" onclick="toggleAIChat()" style="color: var(--primary); font-weight: 600;">Read all 5 testimonials →</a>`
+        },
+        ai: {
+          keywords: ['ai', 'artificial intelligence', 'machine learning', 'ml', 'modernization', 'automation'],
+          response: `<strong>AI & ERP Modernization Focus:</strong><br><br>
+            Currently exploring how AI can transform traditional ERP systems:<br>
+            • Intelligent automation for PeopleSoft workflows<br>
+            • AI-powered decision support<br>
+            • Modern capabilities for legacy systems<br><br>
+            <a href="#now" onclick="toggleAIChat()" style="color: var(--primary); font-weight: 600;">See what I'm working on now →</a>`
+        },
+        contact: {
+          keywords: ['contact', 'reach', 'email', 'connect', 'talk', 'discuss', 'hire', 'consultation'],
+          response: `<strong>Let's Connect!</strong><br><br>
+            📧 Email: mahesh.maheshwarr@gmail.com<br>
+            💼 LinkedIn: <a href="https://linkedin.com/in/mahesh-ramanathan-51b9824" target="_blank" style="color: var(--primary);">Connect with me</a><br>
+            💻 GitHub: <a href="https://github.com/maheshmaheshwarr-stack" target="_blank" style="color: var(--primary);">@maheshmaheshwarr-stack</a><br><br>
+            <a href="#contact" onclick="toggleAIChat()" style="color: var(--primary); font-weight: 600;">Send me a message →</a>`
+        },
+        skills: {
+          keywords: ['skill', 'technology', 'tools', 'know', 'proficient', 'expert'],
+          response: `<strong>Core Skills:</strong><br><br>
+            💼 PeopleSoft FSCM, Financials, Supply Chain<br>
+            🔧 PeopleTools, SQL, Integration<br>
+            🚀 Implementation, Upgrades, Support<br>
+            🤖 AI/ML, ERP Modernization<br><br>
+            <a href="#about" onclick="toggleAIChat()" style="color: var(--primary); font-weight: 600;">View all skills →</a>`
+        },
+        hobbies: {
+          keywords: ['hobby', 'hobbies', 'interest', 'personal', 'driving', 'photography', 'car'],
+          response: `<strong>Beyond Work:</strong><br><br>
+            🚗 Automobile enthusiast - driven 12 different cars<br>
+            🏎️ 5 lakh+ km driven (12+ times around Earth!)<br>
+            📱 Mobile photography<br>
+            🌍 Explored entire South India by road<br><br>
+            <a href="#hobbies" onclick="toggleAIChat()" style="color: var(--primary); font-weight: 600;">Learn more about my interests →</a>`
+        },
+        resume: {
+          keywords: ['resume', 'cv', 'download', 'pdf'],
+          response: `<strong>Download Resume:</strong><br><br>
+            You can download my detailed resume by clicking the "Download Resume" button in the hero section.<br><br>
+            Note: A quick verification form is required to ensure genuine requests.<br><br>
+            <button onclick="showResumeModal(); toggleAIChat();" style="padding: 8px 16px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">Download Resume</button>`
+        }
+      };
+
+      // Find matching response
+      for (const [key, data] of Object.entries(knowledge)) {
+        if (data.keywords.some(keyword => msg.includes(keyword))) {
+          return data.response;
+        }
+      }
+
+      // Greetings
+      if (msg.match(/^(hi|hello|hey|greetings)/)) {
+        return `👋 Hello! I'm here to help you learn about Mahesh's expertise and experience.<br><br>
+          You can ask me about:<br>
+          • PeopleSoft experience<br>
+          • Projects and work<br>
+          • AI modernization<br>
+          • Contact information<br><br>
+          What would you like to know?`;
+      }
+
+      // Thanks
+      if (msg.match(/(thank|thanks)/)) {
+        return `You're welcome! Feel free to ask anything else or <a href="#contact" onclick="toggleAIChat()" style="color: var(--primary); font-weight: 600;">get in touch directly</a>. 😊`;
+      }
+
+      // Default response
+      return `I can help you with information about:<br><br>
+        • <span onclick="askQuestion('experience')" style="color: var(--primary); cursor: pointer; font-weight: 600;">PeopleSoft Experience</span><br>
+        • <span onclick="askQuestion('projects')" style="color: var(--primary); cursor: pointer; font-weight: 600;">Projects & Work</span><br>
+        • <span onclick="askQuestion('ai')" style="color: var(--primary); cursor: pointer; font-weight: 600;">AI Modernization</span><br>
+        • <span onclick="askQuestion('contact')" style="color: var(--primary); cursor: pointer; font-weight: 600;">Contact Information</span><br><br>
+        Try asking one of these questions!`;
+    }
+
+    // Show chat hint after 5 seconds
+    setTimeout(() => {
+      const btn = document.getElementById('ai-chat-btn');
+      btn.style.animation = 'pulse 2s infinite';
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.1); box-shadow: 0 4px 20px rgba(30, 64, 175, 0.6); }
+        }
+      `;
+      document.head.appendChild(style);
+    }, 5000);
+  </script>
 </body>
 </html>

@@ -21,19 +21,13 @@
     }
 
     :root {
-      --primary: #1e40af;
-      --primary-dark: #1e3a8a;
-      --primary-light: #3b82f6;
-      --accent: #0ea5e9;
-      --text: #1e293b;
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --text: #0f172a;
       --text-muted: #64748b;
-      --text-light: #94a3b8;
       --bg: #ffffff;
       --bg-soft: #f8fafc;
-      --bg-dark: #0f172a;
       --border: #e2e8f0;
-      --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
-      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
     }
 
     body {
@@ -50,12 +44,11 @@
       top: 0;
       left: 0;
       right: 0;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
       z-index: 1000;
-      padding: 20px 0;
-      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+      padding: 16px 0;
     }
 
     nav .container {
@@ -124,16 +117,15 @@
     }
 
     .hero h1 {
-      font-size: 3.75rem;
+      font-size: 3.5rem;
       font-weight: 800;
       line-height: 1.1;
       margin-bottom: 24px;
-      letter-spacing: -0.025em;
-      color: var(--text);
+      letter-spacing: -0.02em;
     }
 
     .hero .gradient-text {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -167,26 +159,24 @@
     .btn-primary {
       background: var(--primary);
       color: white;
-      border: 2px solid var(--primary);
-      box-shadow: 0 4px 6px -1px rgb(30 64 175 / 0.3);
+      border: none;
     }
 
     .btn-primary:hover {
       background: var(--primary-dark);
-      border-color: var(--primary-dark);
       transform: translateY(-2px);
-      box-shadow: 0 10px 15px -3px rgb(30 64 175 / 0.4);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
     }
 
     .btn-secondary {
       background: white;
-      color: var(--primary);
-      border: 2px solid var(--primary);
+      color: var(--text);
+      border: 1px solid var(--border);
     }
 
     .btn-secondary:hover {
-      background: var(--primary);
-      color: white;
+      border-color: var(--primary);
+      color: var(--primary);
     }
 
     /* Section */
@@ -201,16 +191,14 @@
 
     .section-label {
       display: inline-block;
-      padding: 8px 16px;
-      background: #dbeafe;
-      border: 1px solid #93c5fd;
+      padding: 6px 14px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
       border-radius: 999px;
-      font-size: 0.8125rem;
+      font-size: 0.875rem;
       color: var(--primary);
       margin-bottom: 16px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      font-weight: 600;
     }
 
     .section-header h2 {
@@ -629,11 +617,6 @@
       .info-cards {
         grid-template-columns: 1fr;
       }
-
-      /* Featured testimonials responsive */
-      section > div > div[style*="grid-template-columns: repeat(auto-fit, minmax(450px, 1fr))"] {
-        grid-template-columns: 1fr !important;
-      }
     }
   </style>
 </head>
@@ -673,186 +656,6 @@
             Get in Touch
           </a>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured Testimonials Section -->
-  <section style="background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%); padding: 80px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-    <div class="container">
-      <div class="section-header" style="margin-bottom: 48px;">
-        <span class="section-label" style="background: #dbeafe; color: var(--primary); border: 1px solid #93c5fd;">Trusted by Industry Leaders</span>
-        <h2 style="font-size: 2.25rem;">What My Managers Say</h2>
-        <p style="max-width: 700px; margin: 0 auto;">Recommendations from leaders at Rimini Street and Oracle</p>
-      </div>
-
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 32px; max-width: 1100px; margin: 0 auto;">
-        <!-- Featured Testimonial 1: Jayaprakash -->
-        <div style="
-          background: white;
-          border: 2px solid var(--primary);
-          border-radius: 16px;
-          padding: 32px;
-          box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-          position: relative;
-        ">
-          <div style="
-            position: absolute;
-            top: -12px;
-            left: 32px;
-            background: var(--primary);
-            color: white;
-            padding: 6px 16px;
-            border-radius: 999px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-          ">Featured</div>
-          
-          <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
-            <div style="
-              width: 64px;
-              height: 64px;
-              border-radius: 50%;
-              background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              color: white;
-              font-weight: 700;
-              font-size: 1.5rem;
-              flex-shrink: 0;
-              border: 3px solid white;
-              box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            ">JA</div>
-            <div>
-              <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 4px; color: var(--text);">Jayaprakash Arjarapu, PMP® CSM</h4>
-              <p style="font-size: 0.875rem; color: var(--text-muted); margin: 0;">Regional Manager, Rimini Street</p>
-              <p style="font-size: 0.8125rem; color: var(--text-light); margin: 4px 0 0 0;">Ex Oracle | Research Scholar, NIT Warangal</p>
-            </div>
-          </div>
-          
-          <div style="
-            background: #f8fafc;
-            border-left: 4px solid var(--primary);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-          ">
-            <p style="font-size: 0.9375rem; color: var(--text); line-height: 1.7; font-style: italic; margin: 0;">
-              "Mahesh possesses a rare depth of technical knowledge in PeopleSoft modules that sets him apart from his peers. His understanding goes far beyond surface-level functionality—he has an intuitive grasp of the underlying architecture and interdependencies. What impressed me most was Mahesh's ability to remain calm and methodical when facing complex, high-stakes issues. His troubleshooting skills saved our organization countless hours and prevented potential business disruptions."
-            </p>
-          </div>
-          
-          <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid var(--border);">
-            <span style="color: #fbbf24; font-size: 1rem;">⭐⭐⭐⭐⭐</span>
-            <a href="https://www.linkedin.com/in/jayaprakash-arjarapu" target="_blank" rel="noopener noreferrer" style="
-              color: var(--primary);
-              text-decoration: none;
-              font-size: 0.875rem;
-              font-weight: 600;
-              display: inline-flex;
-              align-items: center;
-              gap: 6px;
-            ">
-              View on LinkedIn →
-            </a>
-          </div>
-        </div>
-
-        <!-- Featured Testimonial 2: Alan -->
-        <div style="
-          background: white;
-          border: 2px solid var(--primary);
-          border-radius: 16px;
-          padding: 32px;
-          box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-          position: relative;
-        ">
-          <div style="
-            position: absolute;
-            top: -12px;
-            left: 32px;
-            background: var(--primary);
-            color: white;
-            padding: 6px 16px;
-            border-radius: 999px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-          ">Featured</div>
-          
-          <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
-            <div style="
-              width: 64px;
-              height: 64px;
-              border-radius: 50%;
-              background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              color: white;
-              font-weight: 700;
-              font-size: 1.5rem;
-              flex-shrink: 0;
-              border: 3px solid white;
-              box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            ">AG</div>
-            <div>
-              <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 4px; color: var(--text);">Alan Gould</h4>
-              <p style="font-size: 0.875rem; color: var(--text-muted); margin: 0;">Digital Transformation Leader</p>
-              <p style="font-size: 0.8125rem; color: var(--text-light); margin: 4px 0 0 0;">Strategic Product & Service Design</p>
-            </div>
-          </div>
-          
-          <div style="
-            background: #f8fafc;
-            border-left: 4px solid var(--primary);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-          ">
-            <p style="font-size: 0.9375rem; color: var(--text); line-height: 1.7; font-style: italic; margin: 0;">
-              "I have watched Mahesh grow as a PeopleSoft Financials Functional Professional with Technical skills since hiring him into my team in 2013. He is an excellent Problem Solver who always puts the Client first to deliver creative Incident solutions for their Critical Production systems. Mahesh is able to communicate at multiple levels across an organisation right up into the senior management layers - he is a great advocate and consummate professional."
-            </p>
-          </div>
-          
-          <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid var(--border);">
-            <span style="color: #fbbf24; font-size: 1rem;">⭐⭐⭐⭐⭐</span>
-            <a href="https://www.linkedin.com/in/alan-gould" target="_blank" rel="noopener noreferrer" style="
-              color: var(--primary);
-              text-decoration: none;
-              font-size: 0.875rem;
-              font-weight: 600;
-              display: inline-flex;
-              align-items: center;
-              gap: 6px;
-            ">
-              View on LinkedIn →
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div style="text-align: center; margin-top: 48px;">
-        <a href="#testimonials" style="
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 12px 32px;
-          background: white;
-          color: var(--primary);
-          border: 2px solid var(--primary);
-          border-radius: 8px;
-          text-decoration: none;
-          font-weight: 600;
-          font-size: 0.9375rem;
-          transition: all 0.2s;
-        " onmouseover="this.style.background='var(--primary)'; this.style.color='white';" onmouseout="this.style.background='white'; this.style.color='var(--primary)';">
-          View All Testimonials (5 total) →
-        </a>
       </div>
     </div>
   </section>

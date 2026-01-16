@@ -3583,31 +3583,72 @@
       const queryLower = query.toLowerCase();
       const sentences = resumeText.split(/[.!?]+/).filter(s => s.trim().length > 20);
       
+      // Extract key terms from query (ignore common words)
+      const stopWords = ['what', 'when', 'where', 'which', 'who', 'how', 'did', 'do', 'does', 'is', 'are', 'was', 'were', 'the', 'a', 'an', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'my', 'your', 'i', 'you', 'have', 'has', 'had', 'all', 'tell', 'me', 'about'];
+      const queryWords = queryLower.split(/\s+/).filter(word => 
+        word.length > 2 && !stopWords.includes(word)
+      );
+      
+      // Special handling for specific question types
+      const isCompanyQuestion = queryLower.match(/compan(y|ies)|employer|organization|work(ed)?\s+(at|for|with)/);
+      const isEducationQuestion = queryLower.match(/educat|degree|university|college|school|studied|graduat/);
+      const isCertificationQuestion = queryLower.match(/certif|credential|license/);
+      const isDateQuestion = queryLower.match(/when|date|year|period|duration|how long/);
+      
       // Score each sentence based on relevance
       const scored = sentences.map(sentence => {
         const sentenceLower = sentence.toLowerCase();
         let score = 0;
         
-        // Check each word in query
-        queryLower.split(' ').forEach(word => {
+        // Boost score for sentences with company names
+        if (isCompanyQuestion) {
+          if (sentenceLower.match(/oracle|wipro|rimini|infosys|tcs|accenture|deloitte|pwc|ey|kpmg/)) {
+            score += 10;
+          }
+          if (sentenceLower.match(/\b(19|20)\d{2}\b/)) { // Has year
+            score += 5;
+          }
+        }
+        
+        // Boost score for education-related sentences
+        if (isEducationQuestion) {
+          if (sentenceLower.match(/bachelor|master|phd|degree|university|college|engineering|computer|science|mba/)) {
+            score += 10;
+          }
+        }
+        
+        // Boost score for certification sentences
+        if (isCertificationQuestion) {
+          if (sentenceLower.match(/certif|oracle certified|pmp|itil|aws|azure|google cloud/)) {
+            score += 10;
+          }
+        }
+        
+        // Check each query word
+        queryWords.forEach(word => {
           if (word.length > 3) {
-            // Exact match gets higher score
-            if (sentenceLower.includes(word)) {
-              score += 2;
+            // Exact word match
+            const regex = new RegExp('\\b' + word + '\\b', 'i');
+            if (regex.test(sentenceLower)) {
+              score += 3;
             }
-            // Partial match gets lower score
-            if (sentenceLower.includes(word.substring(0, 4))) {
+            // Partial match
+            else if (sentenceLower.includes(word)) {
               score += 1;
             }
           }
         });
+        
+        // Penalize very short or very long sentences
+        if (sentence.length < 30) score -= 2;
+        if (sentence.length > 300) score -= 3;
         
         return { sentence, score };
       });
       
       // Filter and sort by score
       const relevant = scored
-        .filter(item => item.score > 0)
+        .filter(item => item.score > 3) // Higher threshold
         .sort((a, b) => b.score - a.score)
         .slice(0, 3)
         .map(item => item.sentence.trim());

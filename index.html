@@ -3484,7 +3484,7 @@
         const resumeAnswer = searchResume(msg, resumeContent);
         if (resumeAnswer && resumeAnswer.length > 20) {
           return `<strong>📄 From Resume:</strong><br><br>
-            <div style="background: #f8fafc; padding: 12px; border-left: 3px solid var(--primary); border-radius: 6px; margin: 8px 0; line-height: 1.6;">
+            <div style="background: #f8fafc; padding: 16px; border-left: 3px solid var(--primary); border-radius: 6px; margin: 8px 0; line-height: 1.8;">
               ${resumeAnswer}
             </div>
             <p style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 8px;">
@@ -3581,7 +3581,12 @@
     // Search resume for relevant information
     function searchResume(query, resumeText) {
       const queryLower = query.toLowerCase();
-      const sentences = resumeText.split(/[.!?]+/).filter(s => s.trim().length > 20);
+      
+      // Split by multiple delimiters to better preserve structure
+      const sentences = resumeText
+        .split(/[.!?•\n]+/)
+        .map(s => s.trim())
+        .filter(s => s.length > 15 && s.length < 400);
       
       // Extract key terms from query (ignore common words)
       const stopWords = ['what', 'when', 'where', 'which', 'who', 'how', 'did', 'do', 'does', 'is', 'are', 'was', 'were', 'the', 'a', 'an', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'my', 'your', 'i', 'you', 'have', 'has', 'had', 'all', 'tell', 'me', 'about'];
@@ -3590,36 +3595,60 @@
       );
       
       // Special handling for specific question types
-      const isCompanyQuestion = queryLower.match(/compan(y|ies)|employer|organization|work(ed)?\s+(at|for|with)/);
+      const isCompanyQuestion = queryLower.match(/compan(y|ies)|employer|organization|work(ed)?\s+(at|for|with)|where.*work/);
       const isEducationQuestion = queryLower.match(/educat|degree|university|college|school|studied|graduat/);
       const isCertificationQuestion = queryLower.match(/certif|credential|license/);
-      const isDateQuestion = queryLower.match(/when|date|year|period|duration|how long/);
+      const isRoleQuestion = queryLower.match(/role|position|title|job|designation/);
       
       // Score each sentence based on relevance
       const scored = sentences.map(sentence => {
         const sentenceLower = sentence.toLowerCase();
         let score = 0;
         
-        // Boost score for sentences with company names
+        // Boost score for sentences with company names and dates
         if (isCompanyQuestion) {
-          if (sentenceLower.match(/oracle|wipro|rimini|infosys|tcs|accenture|deloitte|pwc|ey|kpmg/)) {
+          // Major companies
+          if (sentenceLower.match(/\b(oracle|wipro|rimini\s*street|infosys|tcs|ibm|accenture|deloitte|pwc|cognizant|capgemini)\b/)) {
+            score += 15;
+          }
+          // Has date range pattern (2007-2008, 2007 - 2008, etc.)
+          if (sentenceLower.match(/\b(19|20)\d{2}\s*[-–]\s*(19|20)\d{2}\b/)) {
             score += 10;
           }
-          if (sentenceLower.match(/\b(19|20)\d{2}\b/)) { // Has year
+          // Has single year
+          if (sentenceLower.match(/\b(19|20)\d{2}\b/)) {
             score += 5;
+          }
+          // Has job-related words
+          if (sentenceLower.match(/\b(engineer|consultant|manager|analyst|developer|architect|lead|senior|principal)\b/)) {
+            score += 5;
+          }
+          // Penalize if it's about team/customer/project (not employment)
+          if (sentenceLower.match(/\b(team|customer|client|project)\b/)) {
+            score -= 5;
           }
         }
         
         // Boost score for education-related sentences
         if (isEducationQuestion) {
-          if (sentenceLower.match(/bachelor|master|phd|degree|university|college|engineering|computer|science|mba/)) {
-            score += 10;
+          if (sentenceLower.match(/\b(bachelor|master|phd|b\.?e\.?|m\.?e\.?|b\.?tech|m\.?tech|degree|university|college|engineering|computer|science|mba|graduation)\b/)) {
+            score += 15;
+          }
+          if (sentenceLower.match(/\b(19|20)\d{2}\b/)) {
+            score += 5;
           }
         }
         
         // Boost score for certification sentences
         if (isCertificationQuestion) {
-          if (sentenceLower.match(/certif|oracle certified|pmp|itil|aws|azure|google cloud/)) {
+          if (sentenceLower.match(/\b(certif|oracle\s*certified|pmp|itil|aws|azure|google\s*cloud|scrum|agile)\b/)) {
+            score += 15;
+          }
+        }
+        
+        // Boost for role/title questions
+        if (isRoleQuestion) {
+          if (sentenceLower.match(/\b(engineer|consultant|manager|analyst|developer|architect|lead|senior|principal|specialist)\b/)) {
             score += 10;
           }
         }
@@ -3639,22 +3668,30 @@
           }
         });
         
-        // Penalize very short or very long sentences
-        if (sentence.length < 30) score -= 2;
-        if (sentence.length > 300) score -= 3;
+        // Penalize very short sentences
+        if (sentence.length < 30) score -= 3;
         
         return { sentence, score };
       });
       
       // Filter and sort by score
       const relevant = scored
-        .filter(item => item.score > 3) // Higher threshold
+        .filter(item => item.score > 5) // Even higher threshold
         .sort((a, b) => b.score - a.score)
-        .slice(0, 3)
-        .map(item => item.sentence.trim());
+        .slice(0, 4) // Get top 4 instead of 3
+        .map(item => {
+          // Clean up the sentence
+          let cleaned = item.sentence.trim();
+          // Add bullet point if it doesn't start with one
+          if (!cleaned.match(/^[•\-\*]/)) {
+            cleaned = '• ' + cleaned;
+          }
+          return cleaned;
+        });
       
       if (relevant.length > 0) {
-        return relevant.join('. ') + '.';
+        // Join with line breaks for better readability
+        return relevant.join('<br>');
       }
       
       return null;

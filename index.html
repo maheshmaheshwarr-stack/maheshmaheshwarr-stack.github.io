@@ -2307,109 +2307,434 @@
         <p>Recommendations from colleagues and connections on LinkedIn</p>
       </div>
 
-      <div class="testimonials-grid">
-        <!-- Testimonial 1 -->
-        <div class="testimonial-card">
-          <div class="testimonial-header">
-            <div class="testimonial-avatar">JA</div>
-            <div class="testimonial-info">
-              <h4>Jayaprakash Arjarapu, PMP® CSM</h4>
-              <p>Regional Manager, Rimini Street | Ex Oracle</p>
+      <!-- Testimonials Carousel -->
+      <div style="position: relative; max-width: 900px; margin: 0 auto;">
+        
+        <!-- Carousel Container -->
+        <div id="testimonials-carousel" style="
+          position: relative;
+          overflow: hidden;
+          border-radius: 16px;
+          background: white;
+          box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        ">
+          <!-- Testimonial Slides -->
+          <div id="testimonials-track" style="
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+          ">
+            <!-- Testimonial 1 -->
+            <div class="testimonial-slide" style="
+              min-width: 100%;
+              padding: 48px 40px;
+            ">
+              <div style="text-align: center; margin-bottom: 32px;">
+                <div style="
+                  width: 80px;
+                  height: 80px;
+                  border-radius: 50%;
+                  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: white;
+                  font-weight: 700;
+                  font-size: 2rem;
+                  margin: 0 auto 20px;
+                  border: 4px solid white;
+                  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+                ">JA</div>
+                <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: var(--text);">Jayaprakash Arjarapu, PMP® CSM</h4>
+                <p style="font-size: 0.9375rem; color: var(--text-muted); margin: 0;">Regional Manager, Rimini Street | Ex Oracle</p>
+              </div>
+              <div style="
+                background: #f8fafc;
+                border-left: 4px solid var(--primary);
+                padding: 24px;
+                border-radius: 8px;
+                margin-bottom: 24px;
+              ">
+                <p style="font-size: 1rem; color: var(--text); line-height: 1.8; font-style: italic; margin: 0;">
+                  "I had the privilege of managing Mahesh during 2024, and his contributions to our team were exceptional. Mahesh possesses a rare depth of technical knowledge in PeopleSoft modules that sets him apart from his peers. His understanding goes far beyond surface-level functionality—he has an intuitive grasp of the underlying architecture and interdependencies. What impressed me most was Mahesh's ability to remain calm and methodical when facing complex, high-stakes issues. His troubleshooting skills saved our organization countless hours and prevented potential business disruptions."
+                </p>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: #fbbf24; font-size: 1.25rem;">⭐⭐⭐⭐⭐</span>
+                <a href="https://www.linkedin.com/in/jayaprakash-arjarapu" target="_blank" rel="noopener noreferrer" style="
+                  color: var(--primary);
+                  text-decoration: none;
+                  font-size: 0.9375rem;
+                  font-weight: 600;
+                ">View on LinkedIn →</a>
+              </div>
             </div>
-          </div>
-          <div class="testimonial-content">
-            <p>"I had the privilege of managing Mahesh during 2024, and his contributions to our team were exceptional. His deep technical expertise and unwavering commitment made him an indispensable member of our organization. Mahesh possesses a rare depth of technical knowledge in PeopleSoft modules that sets him apart from his peers. His understanding goes far beyond surface-level functionality—he has an intuitive grasp of the underlying architecture and interdependencies that allowed him to diagnose and resolve issues that others found baffling. What impressed me most was Mahesh's ability to remain calm and methodical when facing complex, high-stakes issues. His troubleshooting skills saved our organization countless hours and prevented potential business disruptions. Mahesh's combination of technical mastery, problem-solving capability, and professional integrity makes him exactly the kind of professional that organizations need for mission-critical systems."</p>
-          </div>
-          <div class="testimonial-footer">
-            <span class="testimonial-rating">⭐⭐⭐⭐⭐</span>
-            <a href="https://www.linkedin.com/in/jayaprakash-arjarapu" target="_blank" rel="noopener noreferrer" class="testimonial-link">
-              View on LinkedIn →
-            </a>
+
+            <!-- Testimonial 2 -->
+            <div class="testimonial-slide" style="
+              min-width: 100%;
+              padding: 48px 40px;
+            ">
+              <div style="text-align: center; margin-bottom: 32px;">
+                <div style="
+                  width: 80px;
+                  height: 80px;
+                  border-radius: 50%;
+                  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: white;
+                  font-weight: 700;
+                  font-size: 2rem;
+                  margin: 0 auto 20px;
+                  border: 4px solid white;
+                  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+                ">AG</div>
+                <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: var(--text);">Alan Gould</h4>
+                <p style="font-size: 0.9375rem; color: var(--text-muted); margin: 0;">Driving Digital Transformation Through Strategic Product & Service Design</p>
+              </div>
+              <div style="
+                background: #f8fafc;
+                border-left: 4px solid var(--primary);
+                padding: 24px;
+                border-radius: 8px;
+                margin-bottom: 24px;
+              ">
+                <p style="font-size: 1rem; color: var(--text); line-height: 1.8; font-style: italic; margin: 0;">
+                  "I strongly recommend Mahesh to any team. He is an excellent Problem Solver who always puts the Client first to deliver creative Incident solutions for their Critical Production systems. His application support and consulting skills are now second to none. Mahesh is able to communicate at multiple levels across an organisation right up into the senior management layers - he is a great advocate and consummate professional. He is highly trusted and a great team member."
+                </p>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: #fbbf24; font-size: 1.25rem;">⭐⭐⭐⭐⭐</span>
+                <a href="https://www.linkedin.com/in/alan-gould" target="_blank" rel="noopener noreferrer" style="
+                  color: var(--primary);
+                  text-decoration: none;
+                  font-size: 0.9375rem;
+                  font-weight: 600;
+                ">View on LinkedIn →</a>
+              </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="testimonial-slide" style="
+              min-width: 100%;
+              padding: 48px 40px;
+            ">
+              <div style="text-align: center; margin-bottom: 32px;">
+                <div style="
+                  width: 80px;
+                  height: 80px;
+                  border-radius: 50%;
+                  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: white;
+                  font-weight: 700;
+                  font-size: 2rem;
+                  margin: 0 auto 20px;
+                  border: 4px solid white;
+                  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+                ">PW</div>
+                <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: var(--text);">Phill Wall</h4>
+                <p style="font-size: 0.9375rem; color: var(--text-muted); margin: 0;">Enterprise Applications Specialist</p>
+              </div>
+              <div style="
+                background: #f8fafc;
+                border-left: 4px solid var(--primary);
+                padding: 24px;
+                border-radius: 8px;
+                margin-bottom: 24px;
+              ">
+                <p style="font-size: 1rem; color: var(--text); line-height: 1.8; font-style: italic; margin: 0;">
+                  "I had the distinct pleasure of working alongside Mahesh for approximately 12 years as part of the Rimini Street PAC Asia PeopleSoft support team. Mahesh's deep knowledge of PeopleSoft Financials (FSCM) and PeopleTools allowed him to skillfully support Regional and Global Enterprises worldwide. I always felt confident handing off complex, time-critical tasks—including major system outages—knowing he would handle them with diligence and expertise."
+                </p>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: #fbbf24; font-size: 1.25rem;">⭐⭐⭐⭐⭐</span>
+                <a href="https://www.linkedin.com/in/phill-wall" target="_blank" rel="noopener noreferrer" style="
+                  color: var(--primary);
+                  text-decoration: none;
+                  font-size: 0.9375rem;
+                  font-weight: 600;
+                ">View on LinkedIn →</a>
+              </div>
+            </div>
+
+            <!-- Testimonial 4 -->
+            <div class="testimonial-slide" style="
+              min-width: 100%;
+              padding: 48px 40px;
+            ">
+              <div style="text-align: center; margin-bottom: 32px;">
+                <div style="
+                  width: 80px;
+                  height: 80px;
+                  border-radius: 50%;
+                  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: white;
+                  font-weight: 700;
+                  font-size: 2rem;
+                  margin: 0 auto 20px;
+                  border: 4px solid white;
+                  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+                ">VL</div>
+                <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: var(--text);">Vineet Loiwal</h4>
+                <p style="font-size: 0.9375rem; color: var(--text-muted); margin: 0;">Program Management | Strategic Simplification & Transformation Programs</p>
+              </div>
+              <div style="
+                background: #f8fafc;
+                border-left: 4px solid var(--primary);
+                padding: 24px;
+                border-radius: 8px;
+                margin-bottom: 24px;
+              ">
+                <p style="font-size: 1rem; color: var(--text); line-height: 1.8; font-style: italic; margin: 0;">
+                  "Mahesh is an outstanding Senior Peoplesoft technical consultant and is passionate about delivering the best in class services to the customer. His level of commitment is highly appreciable and he was one of the best tech leads I had in my program where he managed the US customer requirements and drive the offshore PS team and delivered many solutions to customer complex requirements."
+                </p>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: #fbbf24; font-size: 1.25rem;">⭐⭐⭐⭐⭐</span>
+                <a href="https://www.linkedin.com/in/vineet-loiwal" target="_blank" rel="noopener noreferrer" style="
+                  color: var(--primary);
+                  text-decoration: none;
+                  font-size: 0.9375rem;
+                  font-weight: 600;
+                ">View on LinkedIn →</a>
+              </div>
+            </div>
+
+            <!-- Testimonial 5 -->
+            <div class="testimonial-slide" style="
+              min-width: 100%;
+              padding: 48px 40px;
+            ">
+              <div style="text-align: center; margin-bottom: 32px;">
+                <div style="
+                  width: 80px;
+                  height: 80px;
+                  border-radius: 50%;
+                  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: white;
+                  font-weight: 700;
+                  font-size: 2rem;
+                  margin: 0 auto 20px;
+                  border: 4px solid white;
+                  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+                ">SG</div>
+                <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: var(--text);">Sudipta Gautam</h4>
+                <p style="font-size: 0.9375rem; color: var(--text-muted); margin: 0;">Managing Partner IAN Fund</p>
+              </div>
+              <div style="
+                background: #f8fafc;
+                border-left: 4px solid var(--primary);
+                padding: 24px;
+                border-radius: 8px;
+                margin-bottom: 24px;
+              ">
+                <p style="font-size: 1rem; color: var(--text); line-height: 1.8; font-style: italic; margin: 0;">
+                  "Mahesh has been a strong technical performer in his team. He has a good grasp on technical issues and has extremely good interpersonal skills. He will be an asset in any team which he is a part of."
+                </p>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: #fbbf24; font-size: 1.25rem;">⭐⭐⭐⭐⭐</span>
+                <a href="https://www.linkedin.com/in/sudipta-gautam" target="_blank" rel="noopener noreferrer" style="
+                  color: var(--primary);
+                  text-decoration: none;
+                  font-size: 0.9375rem;
+                  font-weight: 600;
+                ">View on LinkedIn →</a>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Testimonial 2 -->
-        <div class="testimonial-card">
-          <div class="testimonial-header">
-            <div class="testimonial-avatar">AG</div>
-            <div class="testimonial-info">
-              <h4>Alan Gould</h4>
-              <p>Driving Digital Transformation Through Strategic Product & Service Design</p>
-            </div>
-          </div>
-          <div class="testimonial-content">
-            <p>"I strongly recommend Mahesh to any team. I have watched Mahesh grow as a PeopleSoft Financials Functional Professional with Technical skills since hiring him into my team in 2013. He is an excellent Problem Solver who always puts the Client first to deliver creative Incident solutions for their Critical Production systems. His application support and consulting skills are now second to none. He has an excellent consultative client facing manner and attitude and puts the client user at ease. Mahesh is able to communicate at multiple levels across an organisation right up into the senior management layers - he is a great advocate and consummate professional. I was delighted to be able to nominate him successfully for company awards as his manager, and watch him grow in his role. He is highly trusted and a great team member."</p>
-          </div>
-          <div class="testimonial-footer">
-            <span class="testimonial-rating">⭐⭐⭐⭐⭐</span>
-            <a href="https://www.linkedin.com/in/alan-gould" target="_blank" rel="noopener noreferrer" class="testimonial-link">
-              View on LinkedIn →
-            </a>
-          </div>
+        <!-- Navigation Arrows -->
+        <button onclick="previousTestimonial()" style="
+          position: absolute;
+          left: -60px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          background: white;
+          border: 2px solid var(--primary);
+          color: var(--primary);
+          font-size: 1.5rem;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+          transition: all 0.2s;
+        " onmouseover="this.style.background='var(--primary)'; this.style.color='white'" onmouseout="this.style.background='white'; this.style.color='var(--primary)'">
+          ‹
+        </button>
+
+        <button onclick="nextTestimonial()" style="
+          position: absolute;
+          right: -60px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          background: white;
+          border: 2px solid var(--primary);
+          color: var(--primary);
+          font-size: 1.5rem;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+          transition: all 0.2s;
+        " onmouseover="this.style.background='var(--primary)'; this.style.color='white'" onmouseout="this.style.background='white'; this.style.color='var(--primary)'">
+          ›
+        </button>
+
+        <!-- Navigation Dots -->
+        <div id="testimonial-dots" style="
+          display: flex;
+          justify-content: center;
+          gap: 12px;
+          margin-top: 32px;
+        ">
+          <button onclick="goToTestimonial(0)" class="testimonial-dot active" style="
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            background: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s;
+          "></button>
+          <button onclick="goToTestimonial(1)" class="testimonial-dot" style="
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+          "></button>
+          <button onclick="goToTestimonial(2)" class="testimonial-dot" style="
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+          "></button>
+          <button onclick="goToTestimonial(3)" class="testimonial-dot" style="
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+          "></button>
+          <button onclick="goToTestimonial(4)" class="testimonial-dot" style="
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+          "></button>
         </div>
 
-        <!-- Testimonial 3 -->
-        <div class="testimonial-card">
-          <div class="testimonial-header">
-            <div class="testimonial-avatar">PW</div>
-            <div class="testimonial-info">
-              <h4>Phill Wall</h4>
-              <p>Enterprise Applications Specialist</p>
-            </div>
-          </div>
-          <div class="testimonial-content">
-            <p>"I had the distinct pleasure of working alongside Mahesh for approximately 12 years as part of the Rimini Street PAC Asia PeopleSoft support team. As a Principal Support Engineer based in India, Mahesh's deep knowledge of PeopleSoft Financials (FSCM) and PeopleTools allowed him to skillfully support Regional and Global Enterprises worldwide. I always felt confident handing off complex, time-critical tasks—including major system outages—at the end of my shift, knowing he would handle them with diligence and expertise. Mahesh is exceptional at client engagement, successfully liaising with clients from diverse cultures and under high stress. He possesses strong communication skills, speaking excellent English, making him a highly effective support resource and a great liaison between clients and our development teams. Any organization seeking an incredibly reliable, knowledgeable, and dedicated professional would be lucky to have him."</p>
-          </div>
-          <div class="testimonial-footer">
-            <span class="testimonial-rating">⭐⭐⭐⭐⭐</span>
-            <a href="https://www.linkedin.com/in/phill-wall" target="_blank" rel="noopener noreferrer" class="testimonial-link">
-              View on LinkedIn →
-            </a>
-          </div>
-        </div>
-
-        <!-- Testimonial 4 -->
-        <div class="testimonial-card">
-          <div class="testimonial-header">
-            <div class="testimonial-avatar">VL</div>
-            <div class="testimonial-info">
-              <h4>Vineet Loiwal</h4>
-              <p>Program Management | Strategic Simplification & Transformation Programs | Cloud Migration AWS & GCP</p>
-            </div>
-          </div>
-          <div class="testimonial-content">
-            <p>"Mahesh is an outstanding Senior Peoplesoft technical consultant and is passionate about delivering the best in class services to the customer. His level of commitment is highly appreciable and he was one of the best tech leads I had in my program where he managed the US customer requirements and drive the offshore PS team and delivered many solutions to customer complex requirements. I wish him all the best for all his future endeavors."</p>
-          </div>
-          <div class="testimonial-footer">
-            <span class="testimonial-rating">⭐⭐⭐⭐⭐</span>
-            <a href="https://www.linkedin.com/in/vineet-loiwal" target="_blank" rel="noopener noreferrer" class="testimonial-link">
-              View on LinkedIn →
-            </a>
-          </div>
-        </div>
-
-        <!-- Testimonial 5 -->
-        <div class="testimonial-card">
-          <div class="testimonial-header">
-            <div class="testimonial-avatar">SG</div>
-            <div class="testimonial-info">
-              <h4>Sudipta Gautam</h4>
-              <p>Managing Partner IAN Fund</p>
-            </div>
-          </div>
-          <div class="testimonial-content">
-            <p>"Mahesh has been a strong technical performer in his team. He has a good grasp on technical issues and has extremely good interpersonal skills. He will be an asset in any team which he is a part of."</p>
-          </div>
-          <div class="testimonial-footer">
-            <span class="testimonial-rating">⭐⭐⭐⭐⭐</span>
-            <a href="https://www.linkedin.com/in/sudipta-gautam" target="_blank" rel="noopener noreferrer" class="testimonial-link">
-              View on LinkedIn →
-            </a>
-          </div>
-        </div>
+        <!-- Responsive: Hide arrows on mobile -->
+        <style>
+          @media (max-width: 768px) {
+            #testimonials button[onclick*="Testimonial"] {
+              display: none !important;
+            }
+            .testimonial-slide {
+              padding: 32px 24px !important;
+            }
+          }
+        </style>
       </div>
     </div>
   </section>
+
+  <script>
+    // Testimonials Carousel Logic
+    let currentTestimonial = 0;
+    const totalTestimonials = 5;
+    let testimonialInterval;
+
+    function updateTestimonialCarousel() {
+      const track = document.getElementById('testimonials-track');
+      const dots = document.querySelectorAll('.testimonial-dot');
+      
+      // Move carousel
+      track.style.transform = `translateX(-${currentTestimonial * 100}%)`;
+      
+      // Update dots
+      dots.forEach((dot, index) => {
+        if (index === currentTestimonial) {
+          dot.style.background = 'var(--primary)';
+          dot.classList.add('active');
+        } else {
+          dot.style.background = 'transparent';
+          dot.classList.remove('active');
+        }
+      });
+    }
+
+    function nextTestimonial() {
+      currentTestimonial = (currentTestimonial + 1) % totalTestimonials;
+      updateTestimonialCarousel();
+      resetTestimonialInterval();
+    }
+
+    function previousTestimonial() {
+      currentTestimonial = (currentTestimonial - 1 + totalTestimonials) % totalTestimonials;
+      updateTestimonialCarousel();
+      resetTestimonialInterval();
+    }
+
+    function goToTestimonial(index) {
+      currentTestimonial = index;
+      updateTestimonialCarousel();
+      resetTestimonialInterval();
+    }
+
+    function startTestimonialAutoplay() {
+      testimonialInterval = setInterval(nextTestimonial, 5000); // Change every 5 seconds
+    }
+
+    function stopTestimonialAutoplay() {
+      clearInterval(testimonialInterval);
+    }
+
+    function resetTestimonialInterval() {
+      stopTestimonialAutoplay();
+      startTestimonialAutoplay();
+    }
+
+    // Start autoplay when page loads
+    window.addEventListener('load', () => {
+      startTestimonialAutoplay();
+      
+      // Pause on hover
+      const carousel = document.getElementById('testimonials-carousel');
+      carousel.addEventListener('mouseenter', stopTestimonialAutoplay);
+      carousel.addEventListener('mouseleave', startTestimonialAutoplay);
+    });
+  </script>
 
   <!-- Contact Section -->
   <section id="contact">

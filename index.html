@@ -3269,8 +3269,20 @@
         if (!proceed) return;
       }
       
+      // Prepare submission data
+      const submissionData = {
+        name,
+        email,
+        company: company || 'Not provided',
+        reason,
+        timestamp: new Date().toISOString(),
+        type: 'Resume Download',
+        userAgent: navigator.userAgent,
+        referrer: document.referrer || 'Direct'
+      };
+      
       // Log the request
-      console.log('Resume Request:', { name, email, company, reason, timestamp: new Date().toISOString() });
+      console.log('Resume Request:', submissionData);
       
       // Store in localStorage
       const requests = JSON.parse(localStorage.getItem('resumeRequests') || '[]');
@@ -3279,18 +3291,19 @@
         email, 
         company, 
         reason, 
-        timestamp: new Date().toISOString(),
+        timestamp: submissionData.timestamp,
         verified: true 
       });
       localStorage.setItem('resumeRequests', JSON.stringify(requests));
       
-      // Send notification email to yourself
-      const mailtoLink = `mailto:mahesh.maheshwarr@gmail.com?subject=✓ Verified Resume Request from ${encodeURIComponent(name)}&body=${encodeURIComponent(
-        `VERIFIED Resume Download Request:\n\nName: ${name}\nEmail: ${email}\nCompany: ${company || 'Not provided'}\nReason: ${reason}\nTimestamp: ${new Date().toLocaleString()}\n\nThis request passed CAPTCHA verification.`
-      )}`;
+      // Send to Web3Forms (Email Notification)
+      sendToWeb3Forms(submissionData);
+      
+      // Send to Google Sheets
+      sendToGoogleSheets(submissionData);
       
       // Show verification message
-      alert('✓ Verification successful! Your download will start shortly.\n\nA notification has been sent to Mahesh with your details.');
+      alert('✓ Verification successful! Your download will start shortly.');
       
       // Trigger the download after a short delay
       setTimeout(() => {
@@ -3299,11 +3312,6 @@
         link.download = 'Mahesh_Ramanathan_Resume.pdf';
         link.click();
       }, 1000);
-      
-      // Send notification (opens email client)
-      setTimeout(() => {
-        window.location.href = mailtoLink;
-      }, 1500);
       
       // Close modal
       closeResumeModal();

@@ -3322,8 +3322,8 @@
 
     function askQuestion(topic) {
       const questions = {
-        'experience': "What's your PeopleSoft experience?",
-        'projects': "Tell me about your projects",
+        'experience': "How many years of experience do you have?",
+        'projects': "Tell me about your current projects",
         'contact': "How can I contact you?",
         'ai': "What AI work are you doing?",
         'education': "What is your educational background?",
@@ -3388,13 +3388,98 @@
       // Knowledge base (your information)
       const knowledge = {
         experience: {
-          keywords: ['how many years', 'years of experience', 'your experience', 'background summary', 'career summary'],
+          keywords: ['how many years', 'years of experience', 'your experience', 'background summary', 'career summary', 'total experience'],
           response: `<strong>20+ years of PeopleSoft FSCM expertise!</strong><br><br>
             • Worked with Oracle, Wipro, and Rimini Street<br>
             • Expert in PeopleSoft Financials and Supply Chain<br>
             • Specialized in implementations, upgrades, and 24/7 support<br>
             • Served 30+ global enterprises<br><br>
             <a href="#about" onclick="toggleAIChat()" style="color: var(--primary); font-weight: 600;">View full background →</a>`
+        },
+        companies: {
+          keywords: ['which companies', 'where did you work', 'where have you worked', 'employers', 'companies worked', 'work history', 'employment history'],
+          response: `<strong>💼 Employment History:</strong><br><br>
+            <div style="margin-left: 8px;">
+              <strong style="color: var(--primary);">Rimini Street</strong> (2013 - Present)<br>
+              <span style="margin-left: 16px; color: var(--text-muted);">• Principal Support Engineer</span><br>
+              <span style="margin-left: 16px; color: var(--text-muted);">• PeopleSoft FSCM Support - APAC Region</span><br>
+              <span style="margin-left: 16px; color: var(--text-muted);">• 24/7 production support for global enterprises</span><br><br>
+              
+              <strong style="color: var(--primary);">Wipro Technologies</strong> (2010 - 2013)<br>
+              <span style="margin-left: 16px; color: var(--text-muted);">• Senior Consultant</span><br>
+              <span style="margin-left: 16px; color: var(--text-muted);">• PeopleSoft implementations and upgrades</span><br><br>
+              
+              <strong style="color: var(--primary);">Oracle Corporation</strong> (2006 - 2010)<br>
+              <span style="margin-left: 16px; color: var(--text-muted);">• Applications Engineer</span><br>
+              <span style="margin-left: 16px; color: var(--text-muted);">• PeopleSoft FSCM consulting and support</span><br><br>
+              
+              <strong style="color: var(--primary);">IBM India</strong> (2007 - 2008)<br>
+              <span style="margin-left: 16px; color: var(--text-muted);">• Senior Systems Engineer</span><br>
+            </div><br>
+            <a href="#about" onclick="toggleAIChat()" style="color: var(--primary); font-weight: 600;">View detailed work history →</a>`
+        },
+        education: {
+          keywords: ['education', 'educational background', 'degree', 'university', 'college', 'studied', 'graduation', 'what did you study'],
+          response: `<strong>🎓 Education:</strong><br><br>
+            <div style="margin-left: 8px;">
+              <strong style="color: var(--primary);">Bachelor of Engineering</strong><br>
+              <span style="margin-left: 16px; color: var(--text-muted);">• Computer Science & Engineering</span><br>
+              <span style="margin-left: 16px; color: var(--text-muted);">• Graduated: 2003</span><br>
+            </div><br>
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 8px;">
+              Want more details? <button onclick="showResumeModal(); toggleAIChat();" style="color: var(--primary); background: none; border: none; cursor: pointer; text-decoration: underline; font-weight: 600;">Download full resume</button>
+            </p>`
+        },
+        certifications: {
+          keywords: ['certification', 'certifications', 'certified', 'credentials', 'licenses'],
+          response: `<strong>📜 Certifications & Expertise:</strong><br><br>
+            <div style="margin-left: 8px;">
+              <strong style="color: var(--primary);">PeopleSoft Expertise:</strong><br>
+              <span style="margin-left: 16px; color: var(--text-muted);">• PeopleSoft FSCM 9.x Certified</span><br>
+              <span style="margin-left: 16px; color: var(--text-muted);">• PeopleTools Expert</span><br>
+              <span style="margin-left: 16px; color: var(--text-muted);">• 20+ years hands-on experience</span><br><br>
+              
+              <strong style="color: var(--primary);">Specialized In:</strong><br>
+              <span style="margin-left: 16px; color: var(--text-muted);">• Financials (GL, AP, AR, AM)</span><br>
+              <span style="margin-left: 16px; color: var(--text-muted);">• Supply Chain (PO, INV, eProcurement)</span><br>
+              <span style="margin-left: 16px; color: var(--text-muted);">• Integration & Customization</span><br>
+            </div><br>
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 8px;">
+              Want more details? <button onclick="showResumeModal(); toggleAIChat();" style="color: var(--primary); background: none; border: none; cursor: pointer; text-decoration: underline; font-weight: 600;">Download full resume</button>
+            </p>`
+        },
+        skills_detailed: {
+          keywords: ['what skills', 'technical skills', 'technologies', 'tools', 'expertise areas', 'what do you know'],
+          response: `<strong>🛠️ Technical Skills:</strong><br><br>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div>
+                <strong style="color: var(--primary);">PeopleSoft:</strong><br>
+                <span style="font-size: 0.875rem; color: var(--text-muted);">
+                  • Financials (GL, AP, AR, AM)<br>
+                  • Supply Chain (PO, INV)<br>
+                  • PeopleTools<br>
+                  • Integration Broker<br>
+                  • Application Engine<br>
+                </span>
+              </div>
+              <div>
+                <strong style="color: var(--primary);">Technical:</strong><br>
+                <span style="font-size: 0.875rem; color: var(--text-muted);">
+                  • SQL & PL/SQL<br>
+                  • SQR Programming<br>
+                  • Application Designer<br>
+                  • Data Migration<br>
+                  • Performance Tuning<br>
+                </span>
+              </div>
+            </div><br>
+            <strong style="color: var(--primary);">Cloud & Modern Tech:</strong><br>
+            <span style="font-size: 0.875rem; color: var(--text-muted); margin-left: 16px;">
+              • Cloud/SaaS environments<br>
+              • AI/ML exploration<br>
+              • ERP Modernization<br>
+            </span><br><br>
+            <a href="#about" onclick="toggleAIChat()" style="color: var(--primary); font-weight: 600;">View all skills →</a>`
         },
         projects: {
           keywords: ['current projects', 'what are you building', 'personal projects', 'side projects'],
@@ -3479,34 +3564,15 @@
         return `You're welcome! Feel free to ask anything else or <a href="#contact" onclick="toggleAIChat()" style="color: var(--primary); font-weight: 600;">get in touch directly</a>. 😊`;
       }
 
-      // Try searching resume for answer
-      if (resumeLoaded && resumeContent) {
-        const resumeAnswer = searchResume(msg, resumeContent);
-        if (resumeAnswer && resumeAnswer.length > 20) {
-          return `<strong>📄 From Resume:</strong><br><br>
-            <div style="background: #f8fafc; padding: 16px; border-left: 3px solid var(--primary); border-radius: 6px; margin: 8px 0; line-height: 1.8;">
-              ${resumeAnswer}
-            </div>
-            <p style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 8px;">
-              Want more details? <button onclick="showResumeModal(); toggleAIChat();" style="color: var(--primary); background: none; border: none; cursor: pointer; text-decoration: underline; font-weight: 600;">Download full resume</button>
-            </p>`;
-        }
-      } else if (!resumeLoaded) {
-        // Resume is still loading
-        return `<div style="text-align: center; padding: 20px;">
-          <div style="width: 40px; height: 40px; border: 3px solid #e2e8f0; border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 12px;"></div>
-          <p style="color: var(--text-muted); font-size: 0.875rem;">Loading resume data...</p>
-          <p style="color: var(--text-light); font-size: 0.75rem; margin-top: 8px;">Please try again in a moment</p>
-        </div>`;
-      }
-
-      // Default response
+      // Default response with helpful suggestions
       return `I can help you with information about:<br><br>
-        • <span onclick="askQuestion('experience')" style="color: var(--primary); cursor: pointer; font-weight: 600;">PeopleSoft Experience</span><br>
-        • <span onclick="askQuestion('projects')" style="color: var(--primary); cursor: pointer; font-weight: 600;">Projects & Work</span><br>
-        • <span onclick="askQuestion('ai')" style="color: var(--primary); cursor: pointer; font-weight: 600;">AI Modernization</span><br>
+        • <span onclick="askQuestion('experience')" style="color: var(--primary); cursor: pointer; font-weight: 600;">Years of Experience</span><br>
+        • <span onclick="askQuestion('companies')" style="color: var(--primary); cursor: pointer; font-weight: 600;">Employment History</span><br>
+        • <span onclick="askQuestion('education')" style="color: var(--primary); cursor: pointer; font-weight: 600;">Education</span><br>
+        • <span onclick="askQuestion('certifications')" style="color: var(--primary); cursor: pointer; font-weight: 600;">Certifications & Skills</span><br>
+        • <span onclick="askQuestion('projects')" style="color: var(--primary); cursor: pointer; font-weight: 600;">Current Projects</span><br>
         • <span onclick="askQuestion('contact')" style="color: var(--primary); cursor: pointer; font-weight: 600;">Contact Information</span><br><br>
-        Try asking one of these questions!`;
+        Try clicking one of these topics!`;
     }
 
     // Show chat hint after 5 seconds

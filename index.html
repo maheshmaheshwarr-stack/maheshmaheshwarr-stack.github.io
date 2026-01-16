@@ -3481,5 +3481,274 @@
       document.head.appendChild(style);
     }, 5000);
   </script>
+
+  <!-- Progress Bar -->
+  <div id="progress-bar" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    z-index: 10000;
+    transition: width 0.1s ease;
+  "></div>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" onclick="scrollToTop()" style="
+    position: fixed;
+    bottom: 100px;
+    right: 24px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.4);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    ↑
+  </button>
+
+  <script>
+    // ===== SMOOTH SCROLL ANIMATIONS =====
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Add fade-in animation to sections
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(30px)';
+        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(section);
+      });
+
+      // Animate cards
+      const cards = document.querySelectorAll('.project-card, .testimonial-card, .skill-badge, .info-card');
+      cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+        observer.observe(card);
+      });
+    });
+
+    // ===== PROGRESS BAR =====
+    window.addEventListener('scroll', () => {
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (window.scrollY / windowHeight) * 100;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    // ===== BACK TO TOP BUTTON =====
+    window.addEventListener('scroll', () => {
+      const backToTop = document.getElementById('back-to-top');
+      if (window.scrollY > 300) {
+        backToTop.style.opacity = '1';
+        backToTop.style.visibility = 'visible';
+      } else {
+        backToTop.style.opacity = '0';
+        backToTop.style.visibility = 'hidden';
+      }
+    });
+
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    // ===== ANIMATED STATISTICS =====
+    function animateNumber(element, target, duration = 2000) {
+      const start = 0;
+      const increment = target / (duration / 16);
+      let current = start;
+
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          element.textContent = target + '+';
+          clearInterval(timer);
+        } else {
+          element.textContent = Math.floor(current) + '+';
+        }
+      }, 16);
+    }
+
+    // Observe statistics section
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.animated) {
+          entry.target.dataset.animated = 'true';
+          
+          // Find all stat numbers and animate them
+          const statNumbers = entry.target.querySelectorAll('[data-stat-value]');
+          statNumbers.forEach(stat => {
+            const value = parseInt(stat.dataset.statValue);
+            animateNumber(stat, value);
+          });
+        }
+      });
+    }, { threshold: 0.5 });
+
+    // Wait for DOM to be ready
+    document.addEventListener('DOMContentLoaded', () => {
+      // Find statistics section and mark numbers for animation
+      const statsSection = document.querySelector('section[style*="linear-gradient(135deg, var(--primary)"]');
+      if (statsSection) {
+        const statDivs = statsSection.querySelectorAll('div[style*="font-size: 3.5rem"]');
+        statDivs.forEach(div => {
+          const text = div.textContent.trim();
+          const number = parseInt(text);
+          if (!isNaN(number)) {
+            div.dataset.statValue = number;
+            div.textContent = '0+';
+          }
+        });
+        statsObserver.observe(statsSection);
+      }
+    });
+
+    // ===== ENHANCED HOVER EFFECTS =====
+    document.addEventListener('DOMContentLoaded', () => {
+      // Add smooth transitions to all buttons
+      const buttons = document.querySelectorAll('.btn, button');
+      buttons.forEach(btn => {
+        if (!btn.style.transition) {
+          btn.style.transition = 'all 0.3s ease';
+        }
+      });
+
+      // Add smooth transitions to all links
+      const links = document.querySelectorAll('a');
+      links.forEach(link => {
+        if (!link.style.transition) {
+          link.style.transition = 'all 0.2s ease';
+        }
+      });
+    });
+
+    // ===== SMOOTH SCROLL FOR NAVIGATION =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && href !== '#!') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            const offsetTop = target.offsetTop - 80; // Account for fixed nav
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+
+    // ===== LOADING ANIMATION =====
+    window.addEventListener('load', () => {
+      document.body.style.opacity = '0';
+      document.body.style.transition = 'opacity 0.5s ease';
+      setTimeout(() => {
+        document.body.style.opacity = '1';
+      }, 100);
+    });
+  </script>
+
+  <style>
+    /* Smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Enhanced card hover effects */
+    .project-card, .testimonial-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    .project-card:hover, .testimonial-card:hover {
+      transform: translateY(-8px) !important;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12) !important;
+    }
+
+    /* Button hover enhancements */
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(30, 64, 175, 0.3);
+    }
+
+    /* Link hover effects */
+    nav a {
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Skill badge hover enhancement */
+    .skill-badge:hover {
+      transform: translateY(-4px) scale(1.05) !important;
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25) !important;
+    }
+
+    /* Info card hover enhancement */
+    .info-card:hover {
+      transform: translateY(-4px) !important;
+      box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15) !important;
+    }
+
+    /* Fade in animation keyframes */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Loading state */
+    body {
+      opacity: 0;
+    }
+  </style>
 </body>
 </html>

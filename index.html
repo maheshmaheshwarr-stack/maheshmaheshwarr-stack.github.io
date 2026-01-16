@@ -3658,13 +3658,21 @@
     }
     
     // Send notification via Web3Forms (Email)
-    async function sendToWeb3Forms(data) {
+    async function sendToWeb3Forms(data, customSubject = null) {
       const WEB3FORMS_KEY = 'c67ddb26-86b9-4d1a-bd83-0d260515f124';
+      
+      // Determine subject based on type or use custom subject
+      let subject = customSubject;
+      if (!subject) {
+        subject = data.type === 'Resume Download' 
+          ? '📄 New Resume Download Request' 
+          : '🤖 New Chatbot Access Request';
+      }
       
       try {
         const formData = new FormData();
         formData.append('access_key', WEB3FORMS_KEY);
-        formData.append('subject', '🤖 New Chatbot Access Request');
+        formData.append('subject', subject);
         formData.append('from_name', 'Personal Website');
         formData.append('name', data.name);
         formData.append('email', data.email);

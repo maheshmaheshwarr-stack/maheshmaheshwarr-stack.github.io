@@ -3699,24 +3699,34 @@
       const GOOGLE_SHEETS_URL = 'https://api.sheetbest.com/sheets/6aed4cea-0d64-44d6-9172-6de6248900fe';
       
       try {
+        const payload = {
+          Name: data.name,
+          Email: data.email,
+          Company: data.company,
+          Reason: data.reason,
+          Timestamp: data.timestamp,
+          Type: data.type,
+          Referrer: data.referrer || 'Direct'
+        };
+        
+        console.log('📊 Sending to Google Sheets:', payload);
+        
         const response = await fetch(GOOGLE_SHEETS_URL, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            Name: data.name,
-            Email: data.email,
-            Company: data.company,
-            Reason: data.reason,
-            Timestamp: data.timestamp,
-            Type: data.type,
-            Referrer: data.referrer
-          })
+          body: JSON.stringify(payload)
         });
         
+        console.log('📊 Google Sheets response status:', response.status);
+        
         if (response.ok) {
-          console.log('✅ Data logged to Google Sheets successfully');
+          const result = await response.json();
+          console.log('✅ Data logged to Google Sheets successfully:', result);
+        } else {
+          const errorText = await response.text();
+          console.error('❌ Google Sheets error response:', response.status, errorText);
         }
       } catch (error) {
         console.error('❌ Google Sheets logging failed:', error);

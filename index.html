@@ -3674,20 +3674,29 @@
         formData.append('access_key', WEB3FORMS_KEY);
         formData.append('subject', subject);
         formData.append('from_name', 'Personal Website');
+        formData.append('email', 'mahesh.maheshwarr@gmail.com'); // Your email to receive notifications
         formData.append('name', data.name);
-        formData.append('email', data.email);
+        formData.append('visitor_email', data.email); // Visitor's email
         formData.append('company', data.company);
         formData.append('reason', data.reason);
         formData.append('timestamp', data.timestamp);
         formData.append('type', data.type);
+        
+        console.log('📧 Sending email notification via Web3Forms...');
         
         const response = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           body: formData
         });
         
+        console.log('📧 Web3Forms response status:', response.status);
+        
         if (response.ok) {
-          console.log('✅ Email notification sent successfully');
+          const result = await response.json();
+          console.log('✅ Email notification sent successfully:', result);
+        } else {
+          const errorText = await response.text();
+          console.error('❌ Web3Forms error response:', response.status, errorText);
         }
       } catch (error) {
         console.error('❌ Email notification failed:', error);

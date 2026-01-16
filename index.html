@@ -3651,12 +3651,7 @@
     
     // Send notification via Web3Forms (Email)
     async function sendToWeb3Forms(data) {
-      const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY_HERE'; // Replace with your key
-      
-      if (WEB3FORMS_KEY === 'YOUR_WEB3FORMS_ACCESS_KEY_HERE') {
-        console.log('⚠️ Web3Forms key not configured. Email notification skipped.');
-        return;
-      }
+      const WEB3FORMS_KEY = 'c67ddb26-86b9-4d1a-bd83-0d260515f124';
       
       try {
         const formData = new FormData();
@@ -3685,12 +3680,7 @@
     
     // Send to Google Sheets
     async function sendToGoogleSheets(data) {
-      const GOOGLE_SHEETS_URL = 'YOUR_GOOGLE_SHEETS_URL_HERE'; // Replace with your Sheet.best URL
-      
-      if (GOOGLE_SHEETS_URL === 'YOUR_GOOGLE_SHEETS_URL_HERE') {
-        console.log('⚠️ Google Sheets URL not configured. Sheet logging skipped.');
-        return;
-      }
+      const GOOGLE_SHEETS_URL = 'https://api.sheetbest.com/sheets/6aed4cea-0d64-44d6-9172-6de6248900fe';
       
       try {
         const response = await fetch(GOOGLE_SHEETS_URL, {

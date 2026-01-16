@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Reader Test</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f8fafc;
+    }
+    .status {
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    .success { background: #d1fae5; color: #065f46; }
+    .error { background: #fee2e2; color: #991b1b; }
+    .loading { background: #dbeafe; color: #1e40af; }
+    #content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      white-space: pre-wrap;
+      font-size: 14px;
+      line-height: 1.6;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    button {
+      padding: 10px 20px;
+      background: #1e40af;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-right: 10px;
+    }
+    button:hover {
+      background: #1e3a8a;
+    }
+    #search-box {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e2e8f0;
+      border-radius: 6px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    #search-result {
+      background: #f1f5f9;
+      padding: 16px;
+      border-left: 4px solid #1e40af;
+      border-radius: 6px;
+      margin-top: 16px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>📄 PDF Reader Test</h1>
+  <p>Testing PDF.js integration with Mahesh_Ramanathan_Resume.pdf</p>
+
+  <div id="status" class="status loading">⏳ Loading PDF.js library...</div>
+
+  <div style="margin: 20px 0;">
+    <button onclick="loadPDF()">Load Resume PDF</button>
+    <button onclick="showStats()">Show Stats</button>
+  </div>
+
+  <div style="margin: 20px 0;">
+    <h3>Search Resume:</h3>
+    <input type="text" id="search-box" placeholder="Enter search query (e.g., 'Oracle', 'PeopleSoft', 'experience')">
+    <button onclick="searchPDF()">Search</button>
+    <div id="search-result"></div>
+  </div>
+
+  <h3>Resume Content (first 1000 characters):</h3>
+  <div id="content">Click "Load Resume PDF" to extract text...</div>
+
+  <!-- PDF.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    // Configure PDF.js worker
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    
+    let resumeContent = '';
+    let resumeLoaded = false;
+    let pdfStats = {};
+
+    // Update status
+    function updateStatus(message, type) {
+      const statusEl = document.getElementById('status');
+      statusEl.textContent = message;
+      statusEl.className = 'status ' + type;
+    }
+
+    // Load and parse resume PDF
+    async function loadPDF() {
+      if (resumeLoaded) {
+        updateStatus('✅ Resume already loaded!', 'success');
+        return;
+      }
+      
+      updateStatus('⏳ Loading PDF...', 'loading');
+      
+      try {
+        const loadingTask = pdfjsLib.getDocument('Mahesh_Ramanathan_Resume.pdf');
+        const pdf = await loadingTask.promise;
+        let fullText = '';
+        
+        pdfStats.numPages = pdf.numPages;
+        pdfStats.loadTime = Date.now();
+        
+        // Extract text from all pages
+        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+          const page = await pdf.getPage(pageNum);
+          const textContent = await page.getTextContent();
+          const pageText = textContent.items.map(item => item.str).join(' ');
+          fullText += pageText + ' ';
+        }
+        
+        resumeContent = fullText;
+        resumeLoaded = true;
+        pdfStats.textLength = fullText.length;
+        pdfStats.loadTime = Date.now() - pdfStats.loadTime;
+        
+        updateStatus('✅ Resume loaded successfully!', 'success');
+        
+        // Show preview
+        document.getElementById('content').textContent = fullText.substring(0, 1000) + '...';
+        
+        console.log('Resume loaded:', pdfStats);
+      } catch (error) {
+        updateStatus('❌ Error loading PDF: ' + error.message, 'error');
+        console.error('Error:', error);
+      }
+    }
+
+    // Show statistics
+    function showStats() {
+      if (!resumeLoaded) {
+        alert('Please load the PDF first!');
+        return;
+      }
+      
+      alert(`PDF Statistics:
+      
+Pages: ${pdfStats.numPages}
+Characters: ${pdfStats.textLength.toLocaleString()}
+Words: ~${Math.round(pdfStats.textLength / 5).toLocaleString()}
+Load Time: ${pdfStats.loadTime}ms`);
+    }
+
+    // Search resume
+    function searchPDF() {
+      if (!resumeLoaded) {
+        alert('Please load the PDF first!');
+        return;
+      }
+      
+      const query = document.getElementById('search-box').value.trim();
+      if (!query) {
+        alert('Please enter a search query!');
+        return;
+      }
+      
+      const result = searchResume(query, resumeContent);
+      const resultEl = document.getElementById('search-result');
+      
+      if (result) {
+        resultEl.innerHTML = `<strong>Found:</strong><br><br>${result}`;
+        resultEl.style.display = 'block';
+      } else {
+        resultEl.innerHTML = `<strong>No results found for "${query}"</strong>`;
+        resultEl.style.display = 'block';
+      }
+    }
+
+    // Search function (same as in main site)
+    function searchResume(query, resumeText) {
+      const queryLower = query.toLowerCase();
+      const sentences = resumeText.split(/[.!?]+/);
+      
+      // Find relevant sentences
+      const relevant = sentences.filter(sentence => {
+        const sentenceLower = sentence.toLowerCase();
+        return queryLower.split(' ').some(word => 
+          word.length > 3 && sentenceLower.includes(word)
+        );
+      });
+      
+      if (relevant.length > 0) {
+        // Return top 3 most relevant sentences
+        return relevant.slice(0, 3).join('. ').trim() + '.';
+      }
+      
+      return null;
+    }
+
+    // Auto-load on page load
+    window.addEventListener('load', () => {
+      updateStatus('✅ PDF.js library loaded. Ready to load PDF!', 'success');
+    });
+  </script>
+</body>
+</html>

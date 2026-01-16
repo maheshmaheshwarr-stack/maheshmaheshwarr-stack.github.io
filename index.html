@@ -3252,6 +3252,24 @@
             cursor: pointer;
             color: var(--text);
           ">AI Work</button>
+          <button onclick="askQuestion('education')" style="
+            padding: 6px 12px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            color: var(--text);
+          ">Education</button>
+          <button onclick="askQuestion('companies')" style="
+            padding: 6px 12px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            color: var(--text);
+          ">Companies</button>
         </div>
       </div>
 
@@ -3307,7 +3325,10 @@
         'experience': "What's your PeopleSoft experience?",
         'projects': "Tell me about your projects",
         'contact': "How can I contact you?",
-        'ai': "What AI work are you doing?"
+        'ai': "What AI work are you doing?",
+        'education': "What is your educational background?",
+        'certifications': "What certifications do you have?",
+        'companies': "Which companies have you worked for?"
       };
       document.getElementById('ai-input').value = questions[topic];
       sendAIMessage();
@@ -3458,6 +3479,27 @@
         return `You're welcome! Feel free to ask anything else or <a href="#contact" onclick="toggleAIChat()" style="color: var(--primary); font-weight: 600;">get in touch directly</a>. 😊`;
       }
 
+      // Try searching resume for answer
+      if (resumeLoaded && resumeContent) {
+        const resumeAnswer = searchResume(msg, resumeContent);
+        if (resumeAnswer && resumeAnswer.length > 20) {
+          return `<strong>📄 From Resume:</strong><br><br>
+            <div style="background: #f8fafc; padding: 12px; border-left: 3px solid var(--primary); border-radius: 6px; margin: 8px 0; line-height: 1.6;">
+              ${resumeAnswer}
+            </div>
+            <p style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 8px;">
+              Want more details? <button onclick="showResumeModal(); toggleAIChat();" style="color: var(--primary); background: none; border: none; cursor: pointer; text-decoration: underline; font-weight: 600;">Download full resume</button>
+            </p>`;
+        }
+      } else if (!resumeLoaded) {
+        // Resume is still loading
+        return `<div style="text-align: center; padding: 20px;">
+          <div style="width: 40px; height: 40px; border: 3px solid #e2e8f0; border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 12px;"></div>
+          <p style="color: var(--text-muted); font-size: 0.875rem;">Loading resume data...</p>
+          <p style="color: var(--text-light); font-size: 0.75rem; margin-top: 8px;">Please try again in a moment</p>
+        </div>`;
+      }
+
       // Default response
       return `I can help you with information about:<br><br>
         • <span onclick="askQuestion('experience')" style="color: var(--primary); cursor: pointer; font-weight: 600;">PeopleSoft Experience</span><br>
@@ -3493,6 +3535,97 @@
     z-index: 10000;
     transition: width 0.1s ease;
   "></div>
+
+  <!-- PDF.js Library for Resume Reading -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    // Configure PDF.js worker
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    
+    // Global variable to store resume content
+    let resumeContent = '';
+    let resumeLoaded = false;
+
+    // Load and parse resume PDF
+    async function loadResumePDF() {
+      if (resumeLoaded) return resumeContent;
+      
+      try {
+        console.log('📄 Loading resume PDF...');
+        const loadingTask = pdfjsLib.getDocument('Mahesh_Ramanathan_Resume.pdf');
+        const pdf = await loadingTask.promise;
+        let fullText = '';
+        
+        console.log(`📄 PDF loaded: ${pdf.numPages} pages`);
+        
+        // Extract text from all pages
+        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+          const page = await pdf.getPage(pageNum);
+          const textContent = await page.getTextContent();
+          const pageText = textContent.items.map(item => item.str).join(' ');
+          fullText += pageText + ' ';
+        }
+        
+        resumeContent = fullText;
+        resumeLoaded = true;
+        console.log(`✅ Resume loaded successfully! ${fullText.length} characters extracted.`);
+        console.log('💡 Chatbot can now answer questions from resume!');
+        return fullText;
+      } catch (error) {
+        console.error('❌ Error loading resume:', error);
+        console.log('⚠️ Chatbot will work with limited knowledge base only.');
+        return '';
+      }
+    }
+
+    // Search resume for relevant information
+    function searchResume(query, resumeText) {
+      const queryLower = query.toLowerCase();
+      const sentences = resumeText.split(/[.!?]+/).filter(s => s.trim().length > 20);
+      
+      // Score each sentence based on relevance
+      const scored = sentences.map(sentence => {
+        const sentenceLower = sentence.toLowerCase();
+        let score = 0;
+        
+        // Check each word in query
+        queryLower.split(' ').forEach(word => {
+          if (word.length > 3) {
+            // Exact match gets higher score
+            if (sentenceLower.includes(word)) {
+              score += 2;
+            }
+            // Partial match gets lower score
+            if (sentenceLower.includes(word.substring(0, 4))) {
+              score += 1;
+            }
+          }
+        });
+        
+        return { sentence, score };
+      });
+      
+      // Filter and sort by score
+      const relevant = scored
+        .filter(item => item.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 3)
+        .map(item => item.sentence.trim());
+      
+      if (relevant.length > 0) {
+        return relevant.join('. ') + '.';
+      }
+      
+      return null;
+    }
+
+    // Pre-load resume when page loads
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        loadResumePDF();
+      }, 2000); // Load after 2 seconds to not slow down initial page load
+    });
+  </script>
 
   <!-- Back to Top Button -->
   <button id="back-to-top" onclick="scrollToTop()" style="
